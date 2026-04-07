@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/home/home";
-import Services from "../pages/Services/Services";
 import About from "../pages/About/About";
 import Blog from "../pages/Blog/Blog";
 import BlogPost from "../pages/Blog/BlogPost";
 import Contact from "../pages/Contact/Contact";
+import Services from "../pages/Services/Services";
 
 export const router = createBrowserRouter([
   {
@@ -18,23 +18,23 @@ export const router = createBrowserRouter([
         },
         {
             path:'/services',
-            Component:<Services></Services>
+            Component:Services
         },
         {
             path:'/about',
-            Component:<About></About>
+            Component:About
         },
         {
             path:'/blog',
-            Component:<Blog></Blog>
+            Component:Blog
         },
         {
             path:'/blog/:id',
-            Component:<BlogPost></BlogPost>
+            Component:BlogPost
         },
         {
             path:'/contact',
-            Component:<Contact></Contact>
+            Component:Contact
         }
         
     ]
