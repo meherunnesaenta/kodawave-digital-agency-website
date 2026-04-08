@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FaSearch, FaCalendar, FaUser, FaClock, FaArrowRight } from 'react-icons/fa';
 import { blogData } from '../../data/blogData';
 import AnimatedSection from '../../component/AnimatedSection';
+import Header from '../../component/shared/Header';
 
 const Blog = () => {
   const { posts } = blogData;
@@ -43,14 +44,7 @@ const Blog = () => {
       <section className="pt-32 pb-16 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <AnimatedSection>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Our Blog
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-base-content/60 max-w-3xl mx-auto">
-              Insights, stories, and expert advice on digital innovation, development, and design.
-            </p>
+            <Header subText="Insights, stories, and expert advice on digital innovation, development, and design.">Our Blog</Header>
           </AnimatedSection>
         </div>
       </section>

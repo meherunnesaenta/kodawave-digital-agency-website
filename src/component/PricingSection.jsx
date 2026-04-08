@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import PricingCard from './card/PricingCard';
 import AnimatedSection from './AnimatedSection';
 import { Link } from 'react-router';
+import Header from './shared/Header';
 
 
 const PricingSection = () => {
@@ -14,7 +15,7 @@ const PricingSection = () => {
       name: "Starter",
       price: 499,
       yearlyPrice: 399,
-      icon: "🚀",
+
       isPopular: false,
       features: [
         "Landing Page (1 page)",
@@ -30,7 +31,7 @@ const PricingSection = () => {
       name: "Growth",
       price: 1499,
       yearlyPrice: 1199,
-      icon: "📈",
+
       isPopular: true,
       features: [
         "Full Website (5 pages)",
@@ -47,7 +48,7 @@ const PricingSection = () => {
       name: "Premium",
       price: 3499,
       yearlyPrice: 2799,
-      icon: "👑",
+
       isPopular: false,
       features: [
         "Custom Web Application",
@@ -67,17 +68,10 @@ const PricingSection = () => {
         {/* Section Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-            Pricing Plans
+            Pricing Plans Flexible
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-4">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Flexible
-            </span>
-            <span className="text-base-content"> Pricing Options</span>
-          </h2>
-          <p className="text-base-content/60 text-lg">
-            Choose the perfect plan for your business needs. All plans include core features.
-          </p>
+          <Header subText='Choose the perfect plan for your business needs. All plans include core features.'>Pricing Options</Header>
+
         </AnimatedSection>
 
         {/* Billing Toggle */}
@@ -85,21 +79,19 @@ const PricingSection = () => {
           <div className="bg-base-200 p-1 rounded-full inline-flex">
             <button
               onClick={() => setIsYearly(false)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                !isYearly
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${!isYearly
                   ? 'bg-gradient-primary text-white shadow-md'
                   : 'text-base-content/60 hover:text-base-content'
-              }`}
+                }`}
             >
               Monthly
             </button>
             <button
               onClick={() => setIsYearly(true)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                isYearly
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isYearly
                   ? 'bg-gradient-primary text-white shadow-md'
                   : 'text-base-content/60 hover:text-base-content'
-              }`}
+                }`}
             >
               Yearly <span className="text-xs text-primary">Save 20%</span>
             </button>

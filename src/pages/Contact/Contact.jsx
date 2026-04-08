@@ -13,6 +13,7 @@ import {
   FaCheckCircle
 } from 'react-icons/fa';
 import AnimatedSection from '../../component/AnimatedSection';
+import Header from '../../component/shared/Header';
 
 
 const Contact = () => {
@@ -98,14 +99,7 @@ const Contact = () => {
       <section className="pt-32 pb-16 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <AnimatedSection>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Get In Touch
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-base-content/60 max-w-3xl mx-auto">
-              Have a project in mind? We'd love to hear from you. Let's bring your ideas to life.
-            </p>
+            <Header subText="Have a project in mind? We'd love to hear from you. Let's bring your ideas to life.">Get In Touch</Header>
           </AnimatedSection>
         </div>
       </section>
@@ -250,7 +244,7 @@ const Contact = () => {
                         href={social.url}
                         whileHover={{ scale: 1.1, y: -3 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-10 h-10 rounded-full bg-base-100 flex items-center justify-center text-base-content/60 hover:bg-gradient-primary hover:text-white transition-all duration-300"
+                        className="w-10 h-10 rounded-full bg-base-100 flex items-center justify-center text-base-content/60 hover:bg-gradient-primary hover:text-secondary transition-all duration-300"
                       >
                         <social.icon size={18} />
                       </motion.a>

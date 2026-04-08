@@ -1,86 +1,88 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
-import { 
-  FaArrowRight, 
-  FaPlay, 
-  FaChartLine, 
-  FaShieldAlt, 
-  FaRocket 
-} from 'react-icons/fa';
+import { FaArrowRight, FaPlay } from 'react-icons/fa';
 import HeroSphere from '../3d/HeroSphere';
 
-
 const Hero = () => {
-  // Floating text animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.15,
+        delayChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
     }
   };
 
-  const floatingAnimation = {
-    y: [0, -10, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        delay: i * 0.03,
+        duration: 0.5,
+        type: "spring",
+        stiffness: 100
+      }
+    })
   };
+
+  const wordVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.8 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        type: "spring",
+        stiffness: 120,
+        damping: 12
+      }
+    })
+  };
+
+  const subheadingText = "We craft exceptional web experiences that drive growth and deliver results.";
+  const [displayText, setDisplayText] = React.useState("");
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (currentIndex < subheadingText.length) {
+      const timer = setTimeout(() => {
+        setDisplayText(prev => prev + subheadingText[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 30);
+      return () => clearTimeout(timer);
+    }
+  }, [currentIndex, subheadingText]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Gradient */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-base-100 via-base-100 to-primary/5" />
-      
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/20 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              y: [null, -100, -200],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 5 + 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
 
-      {/* 3D Sphere Component */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full opacity-50 lg:opacity-100 pointer-events-none">
+      {/* 3D Sphere */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full opacity-40 lg:opacity-100 pointer-events-none">
         <HeroSphere />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* Left Content */}
           <motion.div
             variants={containerVariants}
@@ -88,178 +90,190 @@ const Hero = () => {
             animate="visible"
             className="text-center lg:text-left"
           >
-            {/* Badge */}
+
+            {/* Main Heading - Letter by Letter Animation */}
+            <div className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
+              <div className="text-base-content">
+                <div className="overflow-hidden inline-block">
+                  {["Transform", "Your"].map((word, wordIdx) => (
+                    <motion.span
+                      key={wordIdx}
+                      custom={wordIdx}
+                      variants={wordVariants}
+                      initial="hidden"
+                      animate="visible"
+                      className="inline-block mr-4"
+                    >
+                      {word.split("").map((letter, letterIdx) => (
+                        <motion.span
+                          key={letterIdx}
+                          custom={letterIdx + wordIdx * 10}
+                          variants={letterVariants}
+                          initial="hidden"
+                          animate="visible"
+                          className="inline-block"
+                          style={{ display: 'inline-block' }}
+                        >
+                          {letter}
+                        </motion.span>
+                      ))}
+                    </motion.span>
+                  ))}
+                </div>
+                <br />
+
+                <div className="overflow-hidden inline-block">
+                  {["Digital", "Presence"].map((word, wordIdx) => (
+                    <motion.span
+                      key={wordIdx}
+                      custom={wordIdx + 2}
+                      variants={wordVariants}
+                      initial="hidden"
+                      animate="visible"
+                      className="inline-block mr-4"
+                    >
+                      {word.split("").map((letter, letterIdx) => (
+                        <motion.span
+                          key={letterIdx}
+                          custom={letterIdx + wordIdx * 10 + 20}
+                          variants={letterVariants}
+                          initial="hidden"
+                          animate="visible"
+                          className="inline-block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+                          style={{ display: 'inline-block' }}
+                        >
+                          {letter}
+                        </motion.span>
+                      ))}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Subheading - Typing Animation with Cursor */}
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
+              className="text-base-content/60 text-lg md:text-xl mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
-              <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-primary">
-                Digital Innovation Agency
-              </span>
+              <span>{displayText}</span>
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="inline-block w-0.5 h-6 bg-primary ml-1"
+              />
             </motion.div>
 
-            {/* Main Heading */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
-            >
-              <span>
-                Transform Your
-              </span>
-              <br />
-              <span className="text-base-content">
-                Digital Presence
-              </span>
-            </motion.h1>
-
-            {/* Subheading */}
+            {/* Animated Gradient Text Below Subheading */}
             <motion.p
-              variants={itemVariants}
-              className="text-base-content/70 text-lg md:text-xl mb-8 max-w-xl mx-auto lg:mx-0"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.5, duration: 0.6 }}
+              className="text-sm text-base-content/40 mb-8 max-w-lg mx-auto lg:mx-0"
             >
-              We craft exceptional web experiences that drive growth, 
-              engage users, and deliver measurable results for your business.
+              <motion.span
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
+              >
+                 500+ Projects Delivered  |  100+ Happy Clients  |  24/7 Support 
+              </motion.span>
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Fixed Height Issue */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative overflow-hidden px-8 py-4 bg-gradient-primary rounded-xl text-white font-semibold flex items-center justify-center gap-2 shadow-glow"
-              >
-                <span>Get Started Free</span>
-                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                <motion.div
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.5 }}
-                />
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-base-200 border border-base-300 rounded-xl text-base-content font-semibold flex items-center justify-center gap-2 hover:border-primary/50 transition-all duration-300"
-              >
-                <FaPlay size={14} />
-                <span>Watch Demo</span>
-              </motion.button>
-            </motion.div>
-
-            {/* Stats Section */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-8 justify-center lg:justify-start"
-            >
-              {[
-                { number: "500+", label: "Projects Completed", icon: FaRocket },
-                { number: "98%", label: "Client Satisfaction", icon: FaChartLine },
-                { number: "24/7", label: "Support Available", icon: FaShieldAlt },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ y: -5 }}
-                  className="flex items-center gap-3"
+              <Link to="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="group relative overflow-hidden px-8 py-4 bg-primary text-primary-content rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-glow transition-all duration-300"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <stat.icon className="text-primary text-xl" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-base-content">{stat.number}</div>
-                    <div className="text-xs text-base-content/50">{stat.label}</div>
-                  </div>
-                </motion.div>
-              ))}
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    Get Started
+                  </motion.span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <FaArrowRight />
+                  </motion.span>
+                  <motion.div
+                    className="absolute inset-0 bg-white/10"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.6 }}
+                  />
+                </motion.button>
+              </Link>
+
+              {/* Watch Demo Button - Fixed: Removed duplicate classes */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="px-8 py-4 w-50 bg-base-200 border border-base-300 rounded-xl text-primary font-semibold flex items-center justify-center gap-2 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300"
+              >
+                <motion.span
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <FaPlay size={14} />
+                </motion.span>
+                <motion.span
+                  whileHover={{ letterSpacing: "0.5px" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Watch Demo
+                </motion.span>
+              </motion.button>
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Animated Cards (Visible on desktop) */}
+          {/* Right Content - Simplified */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="hidden lg:block relative"
-          >
-            <div className="relative">
-              {/* Floating Card 1 */}
-              <motion.div
-                animate={floatingAnimation}
-                className="absolute -top-20 -left-20 w-64 bg-base-100/80 backdrop-blur-lg rounded-2xl p-4 shadow-xl border border-base-300"
-                style={{ animationDelay: "0s" }}
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <span className="text-2xl">🚀</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm">Fast Delivery</h4>
-                    <p className="text-xs text-base-content/50">2x faster development</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Card 2 */}
-              <motion.div
-                animate={floatingAnimation}
-                className="absolute -bottom-10 -right-10 w-64 bg-base-100/80 backdrop-blur-lg rounded-2xl p-4 shadow-xl border border-base-300"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center">
-                    <span className="text-2xl">💡</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm">Expert Team</h4>
-                    <p className="text-xs text-base-content/50">10+ years experience</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Card 3 */}
-              <motion.div
-                animate={floatingAnimation}
-                className="absolute top-1/2 -right-32 w-56 bg-base-100/80 backdrop-blur-lg rounded-2xl p-3 shadow-xl border border-base-300"
-                style={{ animationDelay: "1s" }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center text-white text-xs border-2 border-base-100">
-                        👤
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold">500+ Happy Clients</p>
-                    <p className="text-xs text-base-content/50">Worldwide</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="hidden lg:block"
+          />
         </div>
 
         {/* Scroll Indicator */}
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
-          <span className="text-xs text-base-content/50">Scroll to explore</span>
-          <div className="w-6 h-10 border-2 border-base-content/30 rounded-full flex justify-center">
+          <motion.span
+            className="text-xs text-base-content/40 uppercase tracking-wider"
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            Scroll Down
+          </motion.span>
+          <motion.div
+            className="w-5 h-8 border border-base-content/30 rounded-full flex justify-center"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
             <motion.div
-              animate={{ y: [0, 15, 0] }}
+              animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
               className="w-1 h-2 bg-primary rounded-full mt-2"
             />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

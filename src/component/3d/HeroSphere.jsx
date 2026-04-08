@@ -8,6 +8,16 @@ const AnimatedSphere = () => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
 
+  // Get theme colors from CSS variables
+  const getThemeColors = () => {
+    const root = document.documentElement;
+    const primary = getComputedStyle(root).getPropertyValue('--color-secondary').trim();
+    const secondary = getComputedStyle(root).getPropertyValue('--color-primary').trim();
+    return { primary, secondary };
+  };
+
+  const colors = getThemeColors();
+
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
@@ -30,8 +40,8 @@ const AnimatedSphere = () => {
       onPointerOut={() => setHovered(false)}
     >
       <MeshDistortMaterial
-        color="#8b5cf6"
-        emissive="#06b6d4"
+        color={colors.primary }
+        emissive={colors.secondary }
         emissiveIntensity={0.3}
         metalness={0.8}
         roughness={0.2}

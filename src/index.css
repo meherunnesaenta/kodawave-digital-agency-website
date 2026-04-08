@@ -1,110 +1,109 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* Custom Theme Configuration */
+/* ========================================
+   CUSTOM THEME - LIGHT & DARK PROPER
+   ======================================== */
+
+/* Light Theme - Daylight Mode */
 @plugin "daisyui/theme" {
   name: "kodawave-light";
   default: true;
   prefersdark: false;
   color-scheme: light;
 
-  /* Base Colors */
+  /* Base Colors - White/Light for Daylight */
   --color-base-100: #ffffff;
-  --color-base-200: #f9fafb;
-  --color-base-300: #f3f4f6;
-  --color-base-content: #18181b;
+  --color-base-200: #f8fafc;
+  --color-base-300: #f1f5f9;
+  --color-base-content: #0f172a;
 
-  /* Primary Colors - Violet */
-  --color-primary: #8b5cf6;
+  /* Primary Colors - Teal */
+  --color-primary: #14b8a6;
   --color-primary-content: #ffffff;
 
-  /* Secondary Colors - Cyan */
-  --color-secondary: #06b6d4;
+  /* Secondary Colors - Blue */
+  --color-secondary: #3b82f6;
   --color-secondary-content: #ffffff;
 
-  /* Accent Colors - Rose */
-  --color-accent: #f43f5e;
+  /* Accent Colors - Purple */
+  --color-accent: #8b5cf6;
   --color-accent-content: #ffffff;
 
   /* Neutral Colors */
-  --color-neutral: #3f3f46;
-  --color-neutral-content: #fafafa;
+  --color-neutral: #64748b;
+  --color-neutral-content: #ffffff;
 
   /* Status Colors */
-  --color-info: #3b82f6;
+  --color-info: #0ea5e9;
   --color-info-content: #ffffff;
-
   --color-success: #10b981;
   --color-success-content: #ffffff;
-
   --color-warning: #f59e0b;
   --color-warning-content: #ffffff;
-
   --color-error: #ef4444;
   --color-error-content: #ffffff;
 
-  /* Border Radius */
   --radius-box: 1rem;
   --radius-field: 0.5rem;
   --radius-selector: 0.5rem;
 }
 
-/* Dark Theme */
+/* Dark Theme - Night Mode */
 @plugin "daisyui/theme" {
   name: "kodawave-dark";
   default: false;
   prefersdark: true;
   color-scheme: dark;
 
-  /* Base Colors */
-  --color-base-100: #09090b;
-  --color-base-200: #18181b;
-  --color-base-300: #27272a;
-  --color-base-content: #fafafa;
+  /* Base Colors - Dark/Black for Night */
+  --color-base-100: #0a0a0f;
+  --color-base-200: #111118;
+  --color-base-300: #181820;
+  --color-base-content: #f1f5f9;
 
-  /* Primary Colors - Neon Violet */
-  --color-primary: #c084fc;
-  --color-primary-content: #09090b;
+  /* Primary Colors - Neon Teal */
+  --color-primary: #2dd4bf;
+  --color-primary-content: #0a0a0f;
 
-  /* Secondary Colors - Bright Cyan */
-  --color-secondary: #22d3ee;
-  --color-secondary-content: #09090b;
+  /* Secondary Colors - Bright Blue */
+  --color-secondary: #60a5fa;
+  --color-secondary-content: #0a0a0f;
 
-  /* Accent Colors - Soft Rose */
-  --color-accent: #fb7185;
-  --color-accent-content: #09090b;
+  /* Accent Colors - Soft Purple */
+  --color-accent: #a78bfa;
+  --color-accent-content: #0a0a0f;
 
   /* Neutral Colors */
-  --color-neutral: #52525b;
-  --color-neutral-content: #fafafa;
+  --color-neutral: #334155;
+  --color-neutral-content: #f1f5f9;
 
   /* Status Colors */
-  --color-info: #60a5fa;
-  --color-info-content: #09090b;
-
+  --color-info: #38bdf8;
+  --color-info-content: #0a0a0f;
   --color-success: #34d399;
-  --color-success-content: #09090b;
-
+  --color-success-content: #0a0a0f;
   --color-warning: #fbbf24;
-  --color-warning-content: #09090b;
-
+  --color-warning-content: #0a0a0f;
   --color-error: #f87171;
-  --color-error-content: #09090b;
+  --color-error-content: #0a0a0f;
 
-  /* Border Radius */
   --radius-box: 1rem;
   --radius-field: 0.5rem;
   --radius-selector: 0.5rem;
 }
 
-/* Custom Gradient Utilities */
+/* ========================================
+   GRADIENT UTILITIES
+   ======================================== */
+
 @layer utilities {
   .bg-gradient-primary {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
   
   .bg-gradient-cta {
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
   }
   
   .text-gradient {
@@ -115,11 +114,11 @@
   }
   
   .shadow-glow {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
   }
   
-  .shadow-glow-cyan {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  .shadow-glow-dark {
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
   }
   
   .card-hover {
@@ -128,11 +127,14 @@
   
   .card-hover:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
   }
 }
 
-/* Custom Animations */
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -151,7 +153,10 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Smooth Scrolling */
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
 html {
   scroll-behavior: smooth;
 }
@@ -173,4 +178,15 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-secondary);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+}
+
+body {
+  background: var(--color-base-100);
+  min-height: 100vh;
 }

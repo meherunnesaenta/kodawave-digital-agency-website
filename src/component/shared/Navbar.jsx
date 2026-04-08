@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, NavLink } from 'react-router';
 import Logo from './Logo';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,17 +42,16 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-base-100/80 backdrop-blur-lg shadow-lg'
-            : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? 'bg-base-100/80 backdrop-blur-lg shadow-lg'
+          : 'bg-transparent'
+          }`}
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo Section */}
-            
-                <Logo></Logo>
+
+            <Logo></Logo>
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-1 lg:gap-2">
               {navLinks.map((link, index) => (
@@ -64,10 +64,9 @@ const Navbar = () => {
                   <NavLink
                     to={link.path}
                     className={({ isActive }) =>
-                      `relative px-4 lg:px-5 py-2 text-sm lg:text-base font-medium transition-all duration-300 rounded-lg ${
-                        isActive
-                          ? 'text-primary'
-                          : 'text-base-content/70 hover:text-primary'
+                      `relative px-4 lg:px-5 py-2 text-sm lg:text-base font-medium transition-all duration-300 rounded-lg ${isActive
+                        ? 'text-primary'
+                        : 'text-base-content/70 hover:text-primary'
                       }`
                     }
                   >
@@ -106,8 +105,9 @@ const Navbar = () => {
                   transition={{ duration: 0.3 }}
                   className="absolute"
                 >
-                  ☀️
+                  <FaSun className="text-yellow-500 text-sm md:text-base" />
                 </motion.div>
+
                 <motion.div
                   initial={false}
                   animate={{
@@ -117,15 +117,16 @@ const Navbar = () => {
                   transition={{ duration: 0.3 }}
                   className="absolute"
                 >
-                  🌙
+                  <FaMoon className="text-primary text-sm md:text-base" />
                 </motion.div>
+
               </motion.button>
 
               {/* CTA Button Desktop */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden md:block px-5 py-2 bg-gradient-primary text-white rounded-lg font-medium text-sm hover:shadow-glow transition-all duration-300"
+                className="hidden md:block px-5 py-2 btn btn-primary btn-outline rounded-lg font-medium text-sm hover:shadow-glow transition-all duration-300"
               >
                 Get Started →
               </motion.button>
@@ -176,10 +177,9 @@ const Navbar = () => {
                     to={link.path}
                     onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
-                      `block py-3 px-4 rounded-lg text-base font-medium transition-all duration-300 ${
-                        isActive
-                          ? 'bg-gradient-primary text-white'
-                          : 'text-base-content/70 hover:bg-base-200 hover:text-primary'
+                      `block py-3 px-4 rounded-lg text-base font-medium transition-all duration-300 ${isActive
+                        ? 'bg-gradient-primary text-white'
+                        : 'text-base-content/70 hover:bg-base-200 hover:text-primary'
                       }`
                     }
                   >
@@ -187,7 +187,7 @@ const Navbar = () => {
                   </NavLink>
                 </motion.div>
               ))}
-              
+
               {/* Mobile CTA */}
               <motion.button
                 initial={{ opacity: 0, y: 20 }}

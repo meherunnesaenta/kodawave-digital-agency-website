@@ -120,7 +120,7 @@ export const blogData = {
         <h2>Customizable Design System</h2>
         <p>Tailwind makes it easy to maintain consistent design tokens across your entire application.</p>
       `,
-      image: "https://images.unsplash.com/photo-1507721999477-6c4421e6d7c9?w=800",
+      image: "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=600&h=400&fit=crop",
       date: "March 15, 2026",
       author: "Alex Thompson",
       authorAvatar: "👨‍💻",

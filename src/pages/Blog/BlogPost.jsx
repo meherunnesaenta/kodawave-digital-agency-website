@@ -29,14 +29,6 @@ const BlogPost = () => {
       <section className="relative pt-32 pb-16 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="container mx-auto px-4 md:px-6">
           <AnimatedSection>
-            {/* Back Button */}
-            <button
-              onClick={() => navigate('/blog')}
-              className="inline-flex items-center gap-2 text-primary mb-6 hover:gap-3 transition-all"
-            >
-              <FaArrowLeft size={14} />
-              Back to Blog
-            </button>
 
             {/* Category */}
             <span className="inline-block px-4 py-1 bg-gradient-primary text-white text-sm rounded-full mb-4">
