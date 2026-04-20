@@ -61,19 +61,15 @@ git clone https://github.com/meherunnesaenta/kodawave-intern-task.git
 cd kodawave-intern-task
 Install dependencies
 
-bash
 npm install
 Start development server
 
-bash
 npm run dev
 Build for production
 
-bash
 npm run build
 Preview production build
 
-bash
 npm run preview
 
 ## 🚀 Deployment
@@ -92,6 +88,7 @@ Mobile	< 768px
 Tablet	768px - 1024px
 Desktop	> 1024px
 ## 🎯 Performance Optimizations
+--
 ✅ Lazy loading for images
 
 ✅ Code splitting with React.lazy()
@@ -99,7 +96,7 @@ Desktop	> 1024px
 ✅ Optimized 3D rendering
 
 ✅ Minimal bundle size with Vite
-
+--
 ## 📝 Assessment Requirements Fulfilled
 Requirement	Status
 React.js with Vite	✅
@@ -129,5 +126,4 @@ Icons from React Icons
 
 Images from Unsplash
 
-## 📄 License
-This project is created for Kodawave internship assessment purposes.
+
