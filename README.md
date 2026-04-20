@@ -1,4 +1,4 @@
-# Kodawave - React Developer Internship Assessment
+# Kodawave - Digital agency website
 
 A modern, animated 3D website built with React.js, Tailwind CSS, and Framer Motion for Kodawave's internship assessment.
 
@@ -88,7 +88,7 @@ Mobile	< 768px
 Tablet	768px - 1024px
 Desktop	> 1024px
 ## 🎯 Performance Optimizations
---
+---
 ✅ Lazy loading for images
 
 ✅ Code splitting with React.lazy()
@@ -96,7 +96,7 @@ Desktop	> 1024px
 ✅ Optimized 3D rendering
 
 ✅ Minimal bundle size with Vite
---
+---
 ## 📝 Assessment Requirements Fulfilled
 Requirement	Status
 React.js with Vite	✅
